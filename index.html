@@ -736,24 +736,13 @@
   <div class="flag-stripe" aria-hidden="true"></div>
 
   <script>
-    // Show fallback if iframe fails to load (e.g. X-Frame-Options)
+    // Show fallback if iframe fails to load (e.g. blocked by X-Frame-Options)
     (function () {
       var iframe = document.querySelector('.map-iframe-container iframe');
       var fallback = document.getElementById('mapFallback');
       if (!iframe || !fallback) return;
 
-      var timer = setTimeout(function () {
-        // If iframe hasn't loaded meaningful content (cross-origin limitation),
-        // we make the fallback visible so users always have a working link.
-        // We keep the iframe as well in case it does work.
-      }, 5000);
-
-      iframe.addEventListener('load', function () {
-        clearTimeout(timer);
-      });
-
       iframe.addEventListener('error', function () {
-        clearTimeout(timer);
         fallback.style.display = 'flex';
         iframe.style.display = 'none';
       });
