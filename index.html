@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Изборен Монитор — Платформа за прозрачни и честни избори в България. Следете системните секции, наблюдавайте изборния процес и защитете демокрацията." />
+  <meta property="og:title" content="Изборен Монитор — Честни избори в България" />
+  <meta property="og:description" content="Платформа за прозрачни и честни избори в България. Карта на системните секции под риск." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://izborenmonitor.com" />
+  <title>Изборен Монитор 🇧🇬 — Честни и прозрачни избори в България</title>
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:   #ffffff;
+      --green:   #00966E;
+      --red:     #D62612;
+      --dark:    #1a1a2e;
+      --gray:    #f4f4f6;
+      --text:    #1a1a2e;
+      --muted:   #5a5a72;
+      --radius:  12px;
+      --shadow:  0 4px 24px rgba(0,0,0,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 3px solid transparent;
+      border-image: linear-gradient(to right, var(--white) 0%, var(--green) 33%, var(--red) 66%, var(--white) 100%) 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 2rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--dark);
+    }
+
+    .nav-brand .flag { font-size: 1.4rem; line-height: 1; }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--green); }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #0d1b3e 0%, #1a3a6e 55%, #0f2a4d 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(0,150,110,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 50%, rgba(214,38,18,0.14) 0%, transparent 60%);
+    }
+
+    .hero-content { position: relative; max-width: 780px; margin: 0 auto; }
+
+    .hero-flag { font-size: 3.5rem; margin-bottom: 1rem; display: block; }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.5px;
+    }
+
+    .hero h1 span.accent-green { color: #4dd9a8; }
+    .hero h1 span.accent-red   { color: #ff7b6e; }
+
+    .hero p {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      opacity: 0.85;
+      max-width: 620px;
+      margin: 0 auto 2.2rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--green);
+      color: var(--white);
+      font-size: 1.05rem;
+      font-weight: 700;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 18px rgba(0,150,110,0.35);
+    }
+
+    .hero-cta:hover {
+      background: #007a58;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,150,110,0.45);
+    }
+
+    .hero-cta svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.5; }
+
+    /* ── Section wrapper ── */
+    section { padding: 4rem 2rem; }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 0.3rem 0.85rem;
+      border-radius: 50px;
+      margin-bottom: 1rem;
+    }
+
+    .tag-green { background: #e6f9f4; color: var(--green); }
+    .tag-red   { background: #fdecea; color: var(--red); }
+    .tag-blue  { background: #e8edf8; color: #1a3a6e; }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 0.8rem;
+      color: var(--dark);
+    }
+
+    .section-lead {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 640px;
+      margin-bottom: 2.4rem;
+    }
+
+    /* ── Map section ── */
+    .map-section { background: var(--gray); }
+
+    .map-wrapper {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 2px solid #e0e0ea;
+      background: var(--white);
+    }
+
+    .map-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.4rem;
+      background: var(--white);
+      border-bottom: 1px solid #e8e8f0;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .map-header-left { display: flex; align-items: center; gap: 0.6rem; }
+
+    .map-dot {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 0 3px rgba(214,38,18,0.2);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(214,38,18,0.2); }
+      50%       { box-shadow: 0 0 0 7px rgba(214,38,18,0.0); }
+    }
+
+    .map-header-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--dark);
+    }
+
+    .map-header-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .map-open-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--red);
+      color: var(--white);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.5rem 1.1rem;
+      border-radius: 50px;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+
+    .map-open-btn:hover {
+      background: #b51e0f;
+      transform: translateY(-1px);
+    }
+
+    .map-open-btn svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.5; }
+
+    .map-iframe-container {
+      position: relative;
+      width: 100%;
+      height: 540px;
+    }
+
+    .map-iframe-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .map-iframe-fallback {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background: #f8f8fb;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .map-iframe-fallback .fallback-icon { font-size: 3rem; }
+
+    .map-iframe-fallback p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 360px;
+    }
+
+    .map-iframe-fallback a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--red);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: 50px;
+      transition: background 0.2s;
+    }
+
+    .map-iframe-fallback a:hover { background: #b51e0f; }
+
+    .map-footer {
+      padding: 0.75rem 1.4rem;
+      background: #fafafa;
+      border-top: 1px solid #e8e8f0;
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .map-footer a { color: var(--green); font-weight: 600; }
+    .map-footer a:hover { text-decoration: underline; }
+
+    /* ── Info cards ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      box-shadow: var(--shadow);
+      border: 1px solid #eaeaf0;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 32px rgba(0,0,0,0.13);
+    }
+
+    .card-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .icon-green { background: #e6f9f4; }
+    .icon-red   { background: #fdecea; }
+    .icon-blue  { background: #e8edf8; }
+
+    .card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--dark);
+    }
+
+    .card p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── How-it-works ── */
+    .steps { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .step {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), #00c48c);
+      color: var(--white);
+      font-weight: 800;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 12px rgba(0,150,110,0.3);
+    }
+
+    .step-body h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: var(--dark);
+    }
+
+    .step-body p { font-size: 0.9rem; color: var(--muted); }
+
+    /* ── CTA banner ── */
+    .cta-banner {
+      background: linear-gradient(135deg, #0d1b3e 0%, #1a3a6e 100%);
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: 3rem 2.5rem;
+      text-align: center;
+    }
+
+    .cta-banner h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      margin-bottom: 0.8rem;
+    }
+
+    .cta-banner p {
+      font-size: 1rem;
+      opacity: 0.8;
+      max-width: 520px;
+      margin: 0 auto 2rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--green);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.75rem 1.6rem;
+      border-radius: 50px;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 4px 16px rgba(0,150,110,0.35);
+    }
+
+    .btn-primary:hover { background: #007a58; transform: translateY(-2px); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: transparent;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.75rem 1.6rem;
+      border-radius: 50px;
+      border: 2px solid rgba(255,255,255,0.4);
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--white);
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-2px);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 2.5rem 2rem;
+      font-size: 0.88rem;
+    }
+
+    footer .footer-flag { font-size: 1.5rem; margin-bottom: 0.6rem; display: block; }
+
+    footer strong { color: var(--white); }
+
+    footer .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    footer .footer-links a {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.82rem;
+      transition: color 0.2s;
+    }
+
+    footer .footer-links a:hover { color: #4dd9a8; }
+
+    /* ── Bulgarian flag stripe ── */
+    .flag-stripe {
+      height: 5px;
+      background: linear-gradient(to right, var(--white) 33.33%, var(--green) 33.33% 66.66%, var(--red) 66.66%);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      nav { padding: 0.75rem 1.2rem; }
+      .nav-links { gap: 1rem; }
+      .hero { padding: 3.5rem 1.2rem 3rem; }
+      section { padding: 3rem 1.2rem; }
+      .map-iframe-container { height: 380px; }
+      .cta-banner { padding: 2rem 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Bulgarian flag top stripe -->
+  <div class="flag-stripe" aria-hidden="true"></div>
+
+  <!-- ── Navigation ── -->
+  <nav>
+    <div class="nav-brand">
+      <span class="flag" aria-hidden="true">🇧🇬</span>
+      <span>Изборен Монитор</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#map">Картата</a></li>
+      <li><a href="#about">За нас</a></li>
+      <li><a href="#how">Как работи</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <header class="hero" id="home">
+    <div class="hero-content">
+      <span class="hero-flag" aria-label="Флаг на България">🇧🇬</span>
+      <h1>
+        <span class="accent-green">Честни</span> и
+        <span class="accent-red">прозрачни</span><br />
+        избори в България
+      </h1>
+      <p>
+        Следим изборния процес, идентифицираме секции под риск и предоставяме
+        данни на обществото — за да защитим демокрацията заедно.
+      </p>
+      <a href="#map" class="hero-cta">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+        Виж картата на системните секции
+      </a>
+    </div>
+  </header>
+
+  <!-- ── Map section (Section 1) ── -->
+  <section class="map-section" id="map">
+    <div class="container">
+      <span class="section-tag tag-red">⚠️ Системни секции</span>
+      <h2 class="section-title">Карта на секциите под риск</h2>
+      <p class="section-lead">
+        Интерактивна карта на всички <strong>системни секции</strong> в България —
+        изборни секции, при които исторически са регистрирани съмнения за
+        манипулации и нарушения. Разгледайте ги по регион, населено място и изборен район.
+      </p>
+
+      <div class="map-wrapper">
+        <div class="map-header">
+          <div class="map-header-left">
+            <div class="map-dot" aria-hidden="true"></div>
+            <div>
+              <div class="map-header-title">Живо — Системни секции</div>
+              <div class="map-header-sub">karta.izborenmonitor.com</div>
+            </div>
+          </div>
+          <a href="https://karta.izborenmonitor.com" target="_blank" rel="noopener noreferrer" class="map-open-btn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            Отвори в пълен екран
+          </a>
+        </div>
+
+        <div class="map-iframe-container">
+          <iframe
+            src="https://karta.izborenmonitor.com"
+            title="Карта на системните секции под риск в България"
+            loading="lazy"
+            allowfullscreen
+          ></iframe>
+          <div class="map-iframe-fallback" id="mapFallback" aria-live="polite">
+            <span class="fallback-icon" aria-hidden="true">🗺️</span>
+            <p>Картата не може да се зареди директно тук. Натиснете бутона, за да я отворите.</p>
+            <a href="https://karta.izborenmonitor.com" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              Отвори картата
+            </a>
+          </div>
+        </div>
+
+        <div class="map-footer">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Данните се поддържат от Изборен Монитор. Пълната карта е достъпна на
+          <a href="https://karta.izborenmonitor.com" target="_blank" rel="noopener noreferrer">karta.izborenmonitor.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── About section ── -->
+  <section id="about">
+    <div class="container">
+      <span class="section-tag tag-blue">🏛️ За проекта</span>
+      <h2 class="section-title">Защо Изборен Монитор?</h2>
+      <p class="section-lead">
+        Вярваме, че изборите са основата на демокрацията. Нашата мисия е да осигурим
+        прозрачност и да предоставим на гражданите инструментите, от които се нуждаят
+        за информирано участие.
+      </p>
+
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon icon-red">⚠️</div>
+          <h3>Системни секции</h3>
+          <p>
+            Идентифицираме изборни секции с исторически модел на нарушения — „системни секции" —
+            и ги правим публично достъпни за наблюдателите и гражданите.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-green">📊</div>
+          <h3>Данни и анализи</h3>
+          <p>
+            Събираме и анализираме изборни данни от множество източници, за да разкрием
+            аномалии и несъответствия в изборния процес.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-blue">👁️</div>
+          <h3>Гражданско наблюдение</h3>
+          <p>
+            Подкрепяме гражданските наблюдатели с информация и инструменти, за да могат
+            ефективно да присъстват в секциите под риск.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-green">🔓</div>
+          <h3>Отворени данни</h3>
+          <p>
+            Всички данни са отворени и свободно достъпни. Вярваме в прозрачността —
+            за нас и за изборния процес.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-red">🗳️</div>
+          <h3>Защита на вота</h3>
+          <p>
+            Работим за запазване на тайната на вота и неговата независимост от купен глас
+            и организиран натиск.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-blue">🤝</div>
+          <h3>Партньорства</h3>
+          <p>
+            Си партнираме с НПО, журналисти и международни организации за наблюдение на
+            изборите в България.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── How it works ── -->
+  <section id="how" style="background: var(--gray);">
+    <div class="container">
+      <span class="section-tag tag-green">⚙️ Как работи</span>
+      <h2 class="section-title">Как идентифицираме системните секции?</h2>
+      <p class="section-lead">
+        Методологията ни се основава на исторически данни и статистически анализ.
+      </p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num" aria-hidden="true">1</div>
+          <div class="step-body">
+            <h4>Събиране на данни</h4>
+            <p>Събираме официални протоколи и резултати от ЦИК за всички минали избори.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" aria-hidden="true">2</div>
+          <div class="step-body">
+            <h4>Статистически анализ</h4>
+            <p>Прилагаме статистически модели за идентифициране на аномалии и повтарящи се нарушения по секции.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" aria-hidden="true">3</div>
+          <div class="step-body">
+            <h4>Класификация</h4>
+            <p>Секциите с устойчиви отклонения биват класифицирани като „системни секции" и нанесени на картата.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" aria-hidden="true">4</div>
+          <div class="step-body">
+            <h4>Публично оповестяване</h4>
+            <p>Резултатите са публично достъпни чрез интерактивната карта и отворените ни данни.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" aria-hidden="true">5</div>
+          <div class="step-body">
+            <h4>Актуализация</h4>
+            <p>След всеки избор актуализираме данните и методологията си с новата информация.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA banner ── -->
+  <section>
+    <div class="container">
+      <div class="cta-banner">
+        <h2>Присъедини се към наблюдението 🇧🇬</h2>
+        <p>
+          Заедно можем да осигурим честни избори. Разгледай картата, стани
+          наблюдател или подкрепи нашата работа.
+        </p>
+        <div class="cta-buttons">
+          <a href="https://karta.izborenmonitor.com" target="_blank" rel="noopener noreferrer" class="btn-primary">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+            Виж картата
+          </a>
+          <a href="mailto:info@izborenmonitor.com" class="btn-outline">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            Свържи се с нас
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <span class="footer-flag" aria-label="Флаг на България">🇧🇬</span>
+    <p>
+      <strong>Изборен Монитор</strong> — за честни и прозрачни избори в България
+    </p>
+    <div class="footer-links">
+      <a href="https://karta.izborenmonitor.com" target="_blank" rel="noopener noreferrer">karta.izborenmonitor.com</a>
+      <a href="mailto:info@izborenmonitor.com">Контакт</a>
+    </div>
+  </footer>
+
+  <!-- Bulgarian flag bottom stripe -->
+  <div class="flag-stripe" aria-hidden="true"></div>
+
+  <script>
+    // Show fallback if iframe fails to load (e.g. X-Frame-Options)
+    (function () {
+      var iframe = document.querySelector('.map-iframe-container iframe');
+      var fallback = document.getElementById('mapFallback');
+      if (!iframe || !fallback) return;
+
+      var timer = setTimeout(function () {
+        // If iframe hasn't loaded meaningful content (cross-origin limitation),
+        // we make the fallback visible so users always have a working link.
+        // We keep the iframe as well in case it does work.
+      }, 5000);
+
+      iframe.addEventListener('load', function () {
+        clearTimeout(timer);
+      });
+
+      iframe.addEventListener('error', function () {
+        clearTimeout(timer);
+        fallback.style.display = 'flex';
+        iframe.style.display = 'none';
+      });
+    }());
+  </script>
+
+</body>
+</html>
