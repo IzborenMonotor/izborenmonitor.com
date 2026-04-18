@@ -246,21 +246,21 @@
             '<span class="card-sep">:</span>' +
             '<div class="card-unit"><span class="card-num">' + pad(s) + '</span><span class="card-lbl">сек</span></div>' +
           '</div>' +
-          '<div class="card-sub">19 Апр 2026 · 20:00 ч. (София) · video.izborenmonitor.com</div>' +
+          '<div class="card-sub">19 Апр 2026 · 20:00 ч. (София) · evideo.bg</div>' +
         '</div>';
     } else if (now < LIVE_END) {
       clearInterval(timer);
       el.innerHTML =
-        '<a class="card" href="https://video.izborenmonitor.com" target="_blank" rel="noopener">' +
+        '<a class="card" href="https://evideo.bg/" target="_blank" rel="noopener">' +
           '<div style="font-size:1rem;font-weight:800">👁️‍🗨️ Гледай броенето на живо!</div>' +
-          '<div class="card-sub">video.izborenmonitor.com</div>' +
+          '<div class="card-sub">evideo.bg</div>' +
         '</a>';
     } else {
       clearInterval(timer);
       el.innerHTML =
-        '<a class="card" href="https://video.izborenmonitor.com" target="_blank" rel="noopener">' +
+        '<a class="card" href="https://evideo.bg/" target="_blank" rel="noopener">' +
           '<div style="font-size:0.95rem;font-weight:700">📹 Изборни Камери</div>' +
-          '<div class="card-sub">video.izborenmonitor.com</div>' +
+          '<div class="card-sub">evideo.bg</div>' +
         '</a>';
     }
   }
