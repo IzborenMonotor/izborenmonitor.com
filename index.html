@@ -1,282 +1,37 @@
 <!DOCTYPE html>
 <html lang="bg">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Изборен Монитор — инициатива за честни и прозрачни избори в България." />
-  <link rel="canonical" href="https://izborenmonitor.com/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://izborenmonitor.com/" />
-  <meta property="og:title" content="Изборен Монитор" />
-  <meta property="og:description" content="Инициатива за честни и прозрачни избори в България." />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Изборен Монитор" />
-  <meta name="twitter:description" content="Инициатива за честни и прозрачни избори в България." />
-  <title>🇧🇬 Изборен Монитор</title>
-  <script type="application/ld+json">
-  [
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Изборен Монитор",
-      "url": "https://izborenmonitor.com/",
-      "description": "Инициатива за честни и прозрачни избори в България.",
-      "inLanguage": ["bg", "en"]
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Изборен Монитор",
-      "url": "https://izborenmonitor.com/",
-      "description": "Инициатива за честни и прозрачни избори в България."
-    }
-  ]
-  </script>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background: #0d1b3e;
-      color: #fff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Bulgarian flag stripe */
-    .stripe {
-      height: 5px;
-      background: linear-gradient(to right, #fff 33.33%, #00966E 33.33% 66.66%, #D62612 66.66%);
-    }
-
-    header {
-      text-align: center;
-      padding: 2rem 1.5rem 1.5rem;
-    }
-
-    header h1 {
-      font-size: clamp(1.4rem, 4vw, 2rem);
-      font-weight: 800;
-      letter-spacing: -0.3px;
-    }
-
-    header p {
-      margin-top: 0.5rem;
-      font-size: 0.95rem;
-      opacity: 0.7;
-    }
-
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 0 1rem 1.5rem;
-    }
-
-    .map-card {
-      background: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-      max-width: 1100px;
-      width: 100%;
-      margin: 0 auto;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.35);
-    }
-
-    .map-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.65rem 1rem;
-      background: #fff;
-      border-bottom: 1px solid #e0e0e8;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .map-bar-left {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: #1a1a2e;
-    }
-
-    .dot {
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: #D62612;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%,100% { box-shadow: 0 0 0 3px rgba(214,38,18,.2); }
-      50%      { box-shadow: 0 0 0 7px rgba(214,38,18,.0); }
-    }
-
-    .map-title { font-weight: 700; font-size: 0.9rem; color: #1a1a2e; }
-
-    .open-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      background: #D62612;
-      color: #fff;
-      font-size: 0.8rem;
-      font-weight: 700;
-      padding: 0.4rem 0.9rem;
-      border-radius: 50px;
-      text-decoration: none;
-      transition: background .2s;
-      white-space: nowrap;
-    }
-
-    .open-btn:hover { background: #b51e0f; }
-
-    iframe {
-      display: block;
-      width: 100%;
-      height: 70vh;
-      min-height: 320px;
-      border: none;
-    }
-
-    .map-footer {
-      padding: 0.5rem 1rem;
-      font-size: 0.75rem;
-      color: #888;
-      background: #fafafa;
-      border-top: 1px solid #e0e0e8;
-    }
-
-    .map-footer a { color: #00966E; text-decoration: none; font-weight: 600; }
-    .map-footer a:hover { text-decoration: underline; }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.78rem;
-      opacity: 0.5;
-    }
-
-    #event-banner a, #event-banner .card {
-      background: linear-gradient(135deg, #00704f, #00966E);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 10px;
-      margin: 1rem 1.5rem 0;
-      padding: 0.85rem 1.5rem;
-      text-align: center;
-      color: #fff;
-      text-decoration: none;
-      display: block;
-    }
-    .card-hl { font-size: 0.75rem; opacity: 0.9; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.5rem; font-weight: 600; }
-    .card-digits { display: flex; justify-content: center; gap: 0.35rem; align-items: flex-start; }
-    .card-unit { background: rgba(0,0,0,0.15); border-radius: 6px; padding: 0.35rem 0.6rem; min-width: 48px; text-align: center; }
-    .card-num { font-size: 1.4rem; font-weight: 800; display: block; line-height: 1.1; }
-    .card-lbl { font-size: 0.55rem; opacity: 0.7; text-transform: uppercase; display: block; margin-top: 2px; }
-    .card-sep { font-size: 1.4rem; font-weight: 800; opacity: 0.4; padding-top: 0.35rem; }
-    .card-sub { margin-top: 0.5rem; font-size: 0.72rem; opacity: 0.75; }
-  </style>
-</head>
-<body>
-
-  <div class="stripe"></div>
-
-  <header>
-    <h1>🇧🇬 Изборен Монитор</h1>
-    <div id="event-banner"></div>
-  </header>
-
-  <main>
-    <div class="map-card">
-      <div class="map-bar">
-        <div class="map-bar-left">
-          <div class="dot"></div>
-          <span class="map-title">Карта на секциите под системен риск — https://karta.izborenmonitor.com/persistence</span>
-        </div>
-        <a href="https://karta.izborenmonitor.com/persistence" target="_blank" rel="noopener noreferrer" class="open-btn">
-          ↗ Отвори в пълен екран
-        </a>
-      </div>
-
-      <iframe
-        src="https://karta.izborenmonitor.com/persistence"
-        title="Карта на секциите под системен риск в България"
-        loading="lazy"
-        allowfullscreen
-      ></iframe>
-
-      <div class="map-footer">
-        Пълната карта: <a href="https://karta.izborenmonitor.com/persistence" target="_blank" rel="noopener noreferrer">karta.izborenmonitor.com</a>
-      </div>
-    </div>
-  </main>
-
-  <footer>izborenmonitor.com</footer>
-
-  <div class="stripe"></div>
-
-</body>
-<script>
-(function() {
-  var TARGET   = new Date('2026-04-19T20:00:00+03:00').getTime();
-  var LIVE_END = new Date('2026-04-20T00:00:00+03:00').getTime();
-  var el = document.getElementById('event-banner');
-
-  function pad(n) { return String(n).padStart(2, '0'); }
-
-  function render() {
-    var now = Date.now();
-    if (now < TARGET) {
-      var diff = TARGET - now;
-      var d = Math.floor(diff / 86400000);
-      var h = Math.floor((diff % 86400000) / 3600000);
-      var m = Math.floor((diff % 3600000) / 60000);
-      var s = Math.floor((diff % 60000) / 1000);
-      el.innerHTML =
-        '<div class="card">' +
-          '<div class="card-hl">⏳ Гледай броенето на живо — старт след</div>' +
-          '<div class="card-digits">' +
-            '<div class="card-unit"><span class="card-num">' + pad(d) + '</span><span class="card-lbl">ден</span></div>' +
-            '<span class="card-sep">:</span>' +
-            '<div class="card-unit"><span class="card-num">' + pad(h) + '</span><span class="card-lbl">часа</span></div>' +
-            '<span class="card-sep">:</span>' +
-            '<div class="card-unit"><span class="card-num">' + pad(m) + '</span><span class="card-lbl">мин</span></div>' +
-            '<span class="card-sep">:</span>' +
-            '<div class="card-unit"><span class="card-num">' + pad(s) + '</span><span class="card-lbl">сек</span></div>' +
-          '</div>' +
-          '<div class="card-sub">19 Апр 2026 · 20:00 ч. (София) · evideo.bg</div>' +
-        '</div>';
-    } else if (now < LIVE_END) {
-      clearInterval(timer);
-      el.innerHTML =
-        '<a class="card" href="https://evideo.bg/" target="_blank" rel="noopener">' +
-          '<div style="font-size:1rem;font-weight:800">👁️‍🗨️ Гледай броенето на живо!</div>' +
-          '<div class="card-sub">evideo.bg</div>' +
-        '</a>';
-    } else {
-      clearInterval(timer);
-      el.innerHTML =
-        '<a class="card" href="https://evideo.bg/" target="_blank" rel="noopener">' +
-          '<div style="font-size:0.95rem;font-weight:700">📹 Изборни Камери</div>' +
-          '<div class="card-sub">evideo.bg</div>' +
-        '</a>';
-    }
-  }
-
-  render();
-  var timer = setInterval(render, 1000);
-})();
-</script>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-793M78CX84"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-793M78CX84');
-</script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Изборен монитор</title>
+    <meta name="description" content="Резултати, аномалии и протоколи от изборите в България 2021–2025. Отворени данни за прозрачни избори." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Изборен монитор" />
+    <meta property="og:description" content="Резултати, аномалии и протоколи от изборите в България 2021–2025. Отворени данни за прозрачни избори." />
+    <meta property="og:image" content="https://karta.izborenmonitor.com/og/landing.png?v3" />
+    <meta property="og:url" content="https://karta.izborenmonitor.com" />
+    <meta property="og:site_name" content="Изборен монитор" />
+    <meta property="og:locale" content="bg_BG" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Изборен монитор" />
+    <meta name="twitter:description" content="Резултати, аномалии и протоколи от изборите в България 2021–2025. Отворени данни за прозрачни избори." />
+    <meta name="twitter:image" content="https://karta.izborenmonitor.com/og/landing.png?v3" />
+    <meta name="theme-color" content="#ce463c" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@300..700&family=Cormorant+Infant:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet" />
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y5KKMSM062"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y5KKMSM062', { send_page_view: false });
+    </script>
+    <script type="module" crossorigin src="/assets/index-CYCRxt97.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DMzS2U4p.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
